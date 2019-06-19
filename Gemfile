@@ -16,6 +16,8 @@ gem "redis", "~> 4.0"
 gem "bcrypt", "~> 3.1.7"
 gem "figaro"
 gem "config"
+gem "jquery-rails"
+gem "bootstrap-sass"
 
 gem "bootsnap", ">= 1.1.0", require: false
 

@@ -1,0 +1,12 @@
+<% provide :title, t("users.edit.title") %>
+<% provide :button_text, t("users.edit.savechange") %>
+<h1><%= t "users.edit.update" %></h1>
+<div class="row container">
+  <div class="form-horizontal">
+    <%=render "user_form" %>
+    <div class="gravatar_edit">
+      <%= gravatar_for @user %>
+      <%= link_to t("users.edit.change"), Settings.user.edit.gravatar_host %>
+    </div>
+  </div>
+</div>

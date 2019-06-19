@@ -7,7 +7,7 @@ class CreateSportgrounds < ActiveRecord::Migration[5.2]
       t.time :opentime
       t.time :closetime
       t.references :sportgroundtype, foreign_key:true
-      t.references :user, foreign_key:true
+      t.references :user, foreign_key:true, allow_nil:true
 
       t.timestamps
     end
