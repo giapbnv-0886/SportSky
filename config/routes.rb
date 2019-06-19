@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   patch "forgot_password", to: "sessions#forgot"
 
   resources :users do
-    resources :sportgrounds, only: %i(index new create)
+    resources :sportgrounds, only: %i(index new create edit update)
   end
-  resources :sportgrounds, except: %i(new create)
+  resources :sportgrounds, except: %i(create update)
   resources :account_activations, only: %i(edit)
   resources :password_resets, except: %i(index show destroy)
   resources :follows, only: %i(create destroy)

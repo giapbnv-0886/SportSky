@@ -16,4 +16,4 @@ user:
     gravatar_host: "http://gravatar.com/emails"
 sportground:
   page:
-    per: 5
+    per: 3
