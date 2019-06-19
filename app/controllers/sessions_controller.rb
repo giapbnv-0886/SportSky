@@ -9,8 +9,6 @@ class SessionsController < ApplicationController
         params[:session][:remember_me] == "1" ? remember(user) : forget(user)
         redirect_back_or user
       else
-        user.create_activation_digest
-        user.send_activation_email
         flash[:warning] = t "users.alert.activate"
         redirect_to root_path
       end

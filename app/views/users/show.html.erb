@@ -1,12 +1,16 @@
 <% provide :title, @user.name %>
-<%= @user.name %>
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
+      <ul>
+        <li><h1><%= @user.name %></h1></li>
+        <li><%= @user.email %></li>
+      </ul>
     </section>
+  </aside>
+  <aside class="col-md-6">
+    <%= render @sportgrounds %>
+    <%= paginate @sportgrounds, theme: "twitter-bootstrap-3" %>
   </aside>
 </div>

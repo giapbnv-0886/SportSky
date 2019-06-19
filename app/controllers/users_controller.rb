@@ -24,6 +24,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @sportgrounds = @user.sportgrounds.recent.page(params[:page]).
+      per Settings.sportground.page.per
   end
 
   def edit;  end

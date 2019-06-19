@@ -1,0 +1,40 @@
+<%= form_for [@user,@sportground] do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-8 form-group">
+        <label><%= t "sportground.form.title" %></label>
+        <%= f.text_field :name, html_options = {
+          placeholder:"#{ t "sportground.form.title" }",
+            "class":"form-control", "required": true } %>
+      </div>
+      <div class="col-sm-4 form-group">
+        <label><%= t "sportground.form.sport" %></label>
+        <%= f.collection_select :sportgroundtype_id, Sportgroundtype.all.sort_alphabet,
+          :id, :name, {}, { class: "form-control" } %>
+      </div>
+    </div> <div class="row">
+    <div class="col-sm-8 form-group">
+      <label><%= t "sportground.form.opentime" %></label>
+      <%= f.time_select :opentime, "class":"form-control" %>
+    </div>
+    <div class="col-sm-4 form-group">
+      <label><%= t "sportground.form.closetime" %></label>
+      <%= f.time_select :closetime, "class":"form-control" %>
+    </div>
+  </div>
+    <div class="form-group">
+      <label><%= t "sportground.form.address" %></label>
+      <%= f.text_field :address, html_options = {
+        placeholder: "#{ t "sportground.form.address" }",
+          class:"form-control", "required": true } %>
+    </div>
+    <div class="form-group">
+      <label><%= t "sportground.form.phone" %></label>
+      <%= f.phone_field :phone, html_options = {
+        placeholder:"#{ t "sportground.form.phone" }", class:"form-control",
+          "required": true} %>
+    </div>
+    <%= f.submit t("sportground.submit"), class:"btn btn-lg btn-info" %>
+  </div>
+<% end %>

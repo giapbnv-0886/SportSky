@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="sportground_avatar">
+      <%= image_tag "sportground.jpg", class: "sportground_avatar" %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <ul>
+      <li>
+        <h3><%= sportground.name %></h3>
+      </li>
+      <li>
+        <p><%= sportground.address %></p>
+      </li>
+      <li>
+        <p><%= sportground.phone %></p>
+      </li>
+      <li>
+        <p><%= sportground.opentime %>-<%= sportground.closetime %></p>
+      </li>
+      <li>
+        <%= link_to t("sportground.delete.delete"), sportground, method: :delete,
+          data: {confirm: t("users.alert.sure"), class:"alert danger"} %>
+        <%= link_to t("sportground.show.detail"), sportground_path(sportground) %>
+      </li>
+    </ul>
+  </div>
+</div>

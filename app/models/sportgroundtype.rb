@@ -1,3 +1,6 @@
 class Sportgroundtype < ApplicationRecord
-  belongs_to :sportground
+  has_one :sportground
+
+  scope :sort_alphabet, -> { order(:name)}
+
 end
