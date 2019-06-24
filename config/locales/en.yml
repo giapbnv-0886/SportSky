@@ -1,33 +1,111 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  appname: "SportSky"
+  base_title: "SportSky, Sport in your hand"
+  static-pages:
+    home:
+      title: "Home page"
+      signup: "Sign up now!"
+    help:
+      title: "Help page"
+    about:
+      title: "About page"
+    login:
+      title: "Login"
+    signup:
+      title: "Sign up"
+      update: "Update user information!"
+      signup: "Sign up"
+      username: "User name"
+      email: "E-mail"
+      password: "Password"
+      confirmpassword: "Confirm Password"
+      login: "Login here!"
+  layouts:
+    footer:
+      news: "rails"
+      about: "About"
+      help: "Help"
+    header:
+      rails: "Ruby on Rails"
+      users: "Users"
+      account: "Account"
+      profile: "Profile"
+      settings: "Settings"
+      login: "Login"
+      logout: "Logout"
+  users:
+    alert:
+      success: "Success!"
+      danger: "Failed!"
+      login: "Please log in!"
+      deleted: "User has been deleted!"
+      sure: "You sure?"
+      error: "Failed! Please check again!"
+      activate: "Please check e-mail to activate your account"
+
+    error: "error"
+    index:
+      gravatar: "Gravater"
+      name: "Name"
+      email: "Email"
+      detail: "Detail"
+      delete: "Delete"
+    new:
+      title: "Sign up"
+      update: "Update user information!"
+      signup: "Sign up"
+      username: "User name"
+      email: "E-mail"
+      password: "Password"
+      confirmpassword: "Confirm Password"
+      login: "Login here!"
+    edit:
+      title: "Update"
+      update: "Update user information!"
+      signup: "Sign up"
+      username: "User name"
+      email: "E-mail"
+      password: "Password"
+      confirmpassword: "Confirm Password"
+      login: "Login here!"
+      savechange: "Save change!"
+      change: "Change"
+      success: "Profile updated!"
+    mail:
+      activation: "SportSky|User activation"
+      resetpassword: "SportSky|Reset password"
+      active: "active"
+      content-active: " Welcome to the SportSky! To activate your account. Click"
+    activation:
+      success: "Account is activated!"
+      error: "Invalid activation link!"
+    forgot:
+      title: "Forgot Password"
+      email: "E-mail"
+      submit: "Submit"
+      info: "E-mail was sent with password reset instructions!"
+      error: "E-mail not found!"
+      content: " To reset your password. Click "
+      reset: "reset password"
+      expired: "Password reset has expired!"
+      error_empty: "cannot be empty!"
+      reset_success: "Password has been reset!"
+      token_invalid: "Invalid reset password link!"
+  sessions:
+    email: "Email"
+    phone: "Phone Number"
+    username: "UserName"
+    password: "Password"
+    login: "Login"
+    remember_me: "Remember me on this computer!"
+    forgot_pass: "Forgot password!"
+    newuser: "New user"
+    sign_up: "Sign Up now!"
+    alert:
+      danger: "Invalid email/password combination!"
+      success: "Success!"
+  shared:
+    error_message:
+      content: "The form contains "
+    user_info:
+      view: "view my profile"

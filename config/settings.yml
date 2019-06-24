@@ -1,0 +1,16 @@
+user:
+  password:
+    max_length: 32
+    min_length: 6
+  name:
+    max_length: 100
+  phone:
+    max_length: 15
+    min_length: 5
+  mail:
+    max_length: 255
+  expired_time: 1
+  gravatar:
+    default_size: 50
+  edit:
+    gravatar_host: "http://gravatar.com/emails"
