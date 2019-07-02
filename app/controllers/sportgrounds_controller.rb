@@ -8,6 +8,10 @@ class SportgroundsController < ApplicationController
     @sportground = Sportground.find_by id: params[:id]
     if @sportground
       @pitches = @sportground.pitches.page(params[:page]).per Settings.pitch.page.per
+      respond_to do |format|
+        format.js
+        format.html{ }
+      end
     else
       flash[:danger] = t "sportground.create.alert.failed"
       redirect_to root_path

@@ -1,0 +1,48 @@
+function create_check_time_frame_link(old_url, date) {
+    var url = new URL(old_url);
+    var query_string = url.search;
+    var search_params = new URLSearchParams(query_string);
+    if (search_params.has('date')) {
+        search_params.set('date', date);
+        url.search = search_params.toString();
+        return url.toString();
+    } else {
+        search_params.append('date', date);
+        url.search = search_params.toString();
+        return url.toString();
+    }
+}
+
+function create_check_price_link(old_url, date, timeframe_id) {
+    var url = new URL(old_url);
+    var query_string = url.search;
+    var search_params = new URLSearchParams(query_string);
+    if (search_params.has('date')) {
+        search_params.set('date', date);
+    } else {
+        search_params.append('date', date);
+    }
+    if (search_params.has('timeframe_id')) {
+        search_params.set('timeframe_id', timeframe_id);
+    } else {
+        search_params.append('timeframe_id', timeframe_id);
+    }
+    url.search = search_params.toString();
+    return url.toString();
+}
+
+function checktimeframe() {
+    let check_time_link = $('.check-time-frame a');
+    let old_url = check_time_link.attr('href');
+    let new_ulr = create_check_time_frame_link(old_url, $('#checktimeframe_date').val());
+    check_time_link.attr('href', new_ulr);
+    check_time_link[0].click();
+}
+
+function checkprice() {
+    let check_price_link = $('.check-price a');
+    let old_url = check_price_link.attr('href');
+    let new_ulr = create_check_price_link(old_url, $('#checktimeframe_date').val(), $('#checkprice_timeframe_id').val());
+    check_price_link.attr('href', new_ulr);
+    check_price_link[0].click();
+}

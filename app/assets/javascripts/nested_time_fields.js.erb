@@ -15,7 +15,6 @@ function generate_timefield_arr(start, end, step) {
         arr.push(cur_time);
         cur_time += step * 3600;
     }
-    ;
     return arr;
 }
 
@@ -26,8 +25,6 @@ function generate_hidden_fields() {
 
     let start_hour = moment(start_hour_str).format("X");
     let end_hour = moment(end_hour_str).format("X");
-
-    console.log(start_hour, end_hour);
 
     let timefield_arr = generate_timefield_arr(start_hour, end_hour, step);
 
@@ -58,7 +55,6 @@ function generate_hidden_fields() {
 }
 
 $( document ).ready(function() {
-    console.log( "ready!" );
     $('input.min-rental').change(function () {
         let min_rental = $('input.min-rental').val();
         let min_rental_content = $('input#minrental_content').val();
@@ -77,6 +73,4 @@ $( document ).ready(function() {
             $('input.min-rental').val(1);
         }
     });
-    console.log( "ready!" );
 });
-

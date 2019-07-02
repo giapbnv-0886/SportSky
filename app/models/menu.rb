@@ -3,6 +3,7 @@ class Menu < ApplicationRecord
 
   validates :starttime, :endtime, presence: true
   validates :startday, :endday, presence:  true
+  validates :price, presence: true
 
   scope :order_price, -> {order(:price)}
 

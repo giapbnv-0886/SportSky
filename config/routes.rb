@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "static_pages#home"
+   root "static_pages#home"
 
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
@@ -10,16 +10,18 @@ Rails.application.routes.draw do
   patch "forgot_password", to: "sessions#forgot"
 
   resources :users do
-    resources :sportgrounds, only: %i(index new create edit update)
+    resources :sportgrounds, except: %i(show destroy)
   end
-  resources :sportgrounds do
+  resources :sportgrounds, except: %i(new create) do
     resources :pitches, only: %i(new create edit update)
   end
 
-  resources :pitches, except: %i(new create)
-  resources :sportgrounds, except: %i(create update)
+  resources :pitches, except: %i(new create) do
+    resource :checkingprices, only: %i(show)
+    resource :checkingtimeframes, only: %i(show)
+  end
+
   resources :account_activations, only: %i(edit)
   resources :password_resets, except: %i(index show destroy)
   resources :follows, only: %i(create destroy)
-
 end

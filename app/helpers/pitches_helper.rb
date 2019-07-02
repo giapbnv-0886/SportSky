@@ -1,8 +1,14 @@
 module PitchesHelper
   def create_cwday_array
     cw = []
-    Date::DAYNAMES.each{|d| cw << d.to_date.cwday}
-    return [Date::DAYNAMES,cw]
+    Date::DAYNAMES.each {|d| cw << d.to_date.cwday}
+    return [Date::DAYNAMES, cw]
+  end
+
+  def week_collection_from today
+    week =[]
+    today.upto(today + 7) {|d| week<<d}
+    week.collect{ |d| ["#{Date::ABBR_DAYNAMES[d.wday]} (#{d.to_s})",d] }
   end
 
   def create_timeframe s_time, e_time, step

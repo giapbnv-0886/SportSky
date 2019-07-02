@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, except: %i(new create)
+  before_action :logged_in_user, except: %i(new create show)
   before_action :admin_user, only: %i(destroy)
   before_action :correct_user, except: %i(index new create)
 
@@ -26,6 +26,10 @@ class UsersController < ApplicationController
   def show
     @sportgrounds = @user.sportgrounds.recent.page(params[:page]).
       per Settings.sportground.page.per
+    respond_to do |format|
+      format.js
+      format.html{ }
+    end
   end
 
   def edit;  end

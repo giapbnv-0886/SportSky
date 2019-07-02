@@ -1,0 +1,7 @@
+<% if @price and @price.is_a?Integer %>
+  $('.pitch-cost').text(parseInt('<%= j @price.to_s %>').toLocaleString());
+$('.notification').addClass('hidden');
+<% else %>
+  $(".pitch-cost").text('<%= j t "pitch.show.contact" %>');
+  $('.notification').removeClass('hidden');
+<% end %>

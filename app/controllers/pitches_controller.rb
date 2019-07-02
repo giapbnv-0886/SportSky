@@ -10,6 +10,11 @@ class PitchesController < ApplicationController
 
   def show
     @sportground = @pitch.sportground
+    @time_availables = get_time_frames_for Date.today
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -97,23 +102,29 @@ class PitchesController < ApplicationController
           timeframes_attributes: [:id, :starttime, :endtime, :_destroy]
     end
 
-    def create_timeframe s_time, e_time, step
-      unless step > 0
-        flash[:danger] = t "pitch.alert.step_error"
-        redirect_to root_path
+    def get_price date, timeframe_id
+      pitch = Pitch.find_by id: params[:id]
+      return t "pitch.check_price.error_time" unless pitch.timeframe_ids.include? timeframe_id
+      menus = pitch.menus
+      tf = Timeframe.find_by id: timeframe_id
+      menus.each do |m|
+        if (m.startday.cwday..m.endday.cwday).include?date.cwday
+          menu_times = (m.starttime.to_s(:time).to_time..m.endtime.to_s(:time).to_time)
+          if menu_times.include?tf.starttime.to_s(:time).to_time and
+            menu_times.include?tf.endtime.to_s(:time).to_time
+              return m.price if m.price
+          end
+        end
       end
-      timeframes = []
-      i = 0
-      while s_time + (i*step).hours < e_time
-        s= s_time + (i*step).hours
-        i+=1
-        e= s_time + (i*step).hours
-        timeframes << [s,e]
-      end
-      return timeframes
+      t "pitch.check_price.error_time"
     end
 
-  def redirect_edit
-    redirect_to edit_pitch_path @pitch
-  end
+    def get_time_frames_for date
+      pitch = Pitch.find_by id: params[:id]
+      pitch.timeframes
+    end
+
+    def redirect_edit
+      redirect_to edit_pitch_path @pitch
+    end
 end
