@@ -32,6 +32,8 @@
 #Ignore config project
 /.idea/*
 
+#ignore file uploads
+/public/uploads/*
 # Ignore application configuration
 /config/application.yml
 

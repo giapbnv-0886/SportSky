@@ -5,9 +5,9 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_create :create_activation_digest
 
-  has_one :sportground
-  has_many :schedules
-  has_many :rates
+  has_many :sportgrounds, dependent: :destroy
+  has_many :schedules, dependent: :destroy
+  has_many :rates, dependent: :destroy
   has_many :active_follows, class_name: "Follow",
            foreign_key: "follower_id",dependent: :destroy
   has_many :passive_follows, class_name: "Follow",
@@ -18,15 +18,15 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PASSWORD_REGEX = /[A-Z][a-z]\d/i
 
+
   validates :name, presence:true, length: { maximum: Settings.user.name.max_length }
   validates :email, presence:true, length: { maximum: Settings.user.mail.max_length },
     format: { with: VALID_EMAIL_REGEX}, uniqueness: true
-  validates :phone, presence:false,
-    length: { maximum: Settings.user.phone.max_length }, uniqueness: false
   validates :password, presence: true,
     length: {minimum: Settings.user.password.min_length,
       maximum: Settings.user.password.max_length},
         format: {with: VALID_PASSWORD_REGEX}, allow_nil: true
+  validates :phone, presence:false, length: { maximum: Settings.user.phone.max_length }, uniqueness: false
 
   scope :latest, -> {order("created_at desc")}
 

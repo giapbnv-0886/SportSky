@@ -1,11 +1,11 @@
 <header class="nav navbar-fixed-top navbar-inverse">
-  <div class="container">
     <%= link_to t("app-name"), root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to t("static-pages.home.title"), root_path %></li>
         <li><%= link_to t("static-pages.help.title"), "#" %></li>
         <% if logged_in? %>
+          <li><%= link_to "Become Provider", new_user_sportground_path(current_user) %></li>
           <li><%= link_to t("layouts.header.users"), "#" %></li>
           <li class="dropdown">
             <%= link_to "#", "class":"dropdown-toggle",
@@ -32,5 +32,4 @@
         <% end %>
       </ul>
     </nav>
-  </div>
 </header>

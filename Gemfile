@@ -19,6 +19,8 @@ gem "config"
 gem "jquery-rails"
 gem "bootstrap-sass"
 
+gem "kaminari"
+gem "bootstrap-kaminari-views"
 gem "bootsnap", ">= 1.1.0", require: false
 
 group :development, :test do

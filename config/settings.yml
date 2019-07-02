@@ -14,3 +14,6 @@ user:
     default_size: 50
   edit:
     gravatar_host: "http://gravatar.com/emails"
+sportground:
+  page:
+    per: 5

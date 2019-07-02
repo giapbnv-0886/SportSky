@@ -1,5 +1,5 @@
 en:
-  appname: "SportSky"
+  app-name: "SportSky"
   base_title: "SportSky, Sport in your hand"
   static-pages:
     home:
@@ -109,3 +109,29 @@ en:
       content: "The form contains "
     user_info:
       view: "view my profile"
+  sportground:
+    submit: "Submit"
+    create:
+      alert:
+        success: "Your sport ground has been created!"
+        failed: "Something wrong, Please try again!"
+    show:
+      detail: "Detail"
+    update:
+      alert:
+        permit: "You don't have permission!"
+    delete:
+      alert:
+        success: "Your sport ground has been destroyed!"
+        failed: "Something wrong, Please try again!"
+      delete: "Delete"
+    edit:
+      edit: "Edit"
+    form:
+      title: "Title of your sport ground"
+      sport: "Sport"
+      opentime: "Open time"
+      closetime: "Close time"
+      address: "Sport ground address"
+      phone: "Phone number"
+    becomeprovider: "Become a Provider"
