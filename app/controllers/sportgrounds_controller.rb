@@ -17,13 +17,16 @@ class SportgroundsController < ApplicationController
 
   def create
     @sportground = @user.sportgrounds.build sportground_params
-    if @sportground.save
-      flash[:info] = t "sportground.create.alert.success"
-      redirect_to @user
-    else
-      render :new
+    respond_to do |format|
+      if @sportground.save
+        format.html{
+          flash[:info] = t "sportground.create.alert.success"
+          redirect_to @user
+        }
+      else
+        format.html{ render :new }
+      end
     end
-
   end
 
   def edit; end
@@ -61,6 +64,7 @@ class SportgroundsController < ApplicationController
   end
 
   def sportground_params
-    params.require(:sportground).permit :name, :address,:opentime, :closetime, :phone, :sportgroundtype_id
+    params.require(:sportground)
+        .permit :name, :address,:opentime, :closetime, :phone, :sportgroundtype_id, {photos: []}
   end
 end
