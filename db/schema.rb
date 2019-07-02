@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_27_071021) do
+ActiveRecord::Schema.define(version: 2019_07_19_063702) do
 
   create_table "follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "follower_id"
@@ -25,32 +25,32 @@ ActiveRecord::Schema.define(version: 2019_06_27_071021) do
   create_table "menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "price", precision: 10
     t.time "starttime"
-    t.string "endtime"
+    t.time "endtime"
     t.date "startday"
     t.date "endday"
+    t.bigint "pitch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "menus_pitches", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "menu_id", null: false
-    t.bigint "pitch_id", null: false
-    t.index ["menu_id"], name: "index_menus_pitches_on_menu_id"
-    t.index ["pitch_id"], name: "index_menus_pitches_on_pitch_id"
+    t.index ["pitch_id"], name: "index_menus_on_pitch_id"
   end
 
   create_table "pitches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "pitchtype_id"
+    t.bigint "sportground_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "minrental", default: 1
     t.index ["pitchtype_id"], name: "index_pitches_on_pitchtype_id"
+    t.index ["sportground_id"], name: "index_pitches_on_sportground_id"
   end
 
   create_table "pitchtypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.bigint "sportgroundtype_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["sportgroundtype_id"], name: "index_pitchtypes_on_sportgroundtype_id"
   end
 
   create_table "rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2019_06_27_071021) do
     t.bigint "pitch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "status"
+    t.boolean "status", default: true
     t.index ["pitch_id"], name: "index_timeframes_on_pitch_id"
   end
 
@@ -135,7 +135,10 @@ ActiveRecord::Schema.define(version: 2019_06_27_071021) do
     t.string "remember_digest"
   end
 
+  add_foreign_key "menus", "pitches"
   add_foreign_key "pitches", "pitchtypes"
+  add_foreign_key "pitches", "sportgrounds"
+  add_foreign_key "pitchtypes", "sportgroundtypes"
   add_foreign_key "rates", "sportgrounds"
   add_foreign_key "rates", "users"
   add_foreign_key "schedules", "pitches"

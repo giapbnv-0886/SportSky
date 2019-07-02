@@ -17,3 +17,6 @@ user:
 sportground:
   page:
     per: 3
+pitch:
+  page:
+    per: 4

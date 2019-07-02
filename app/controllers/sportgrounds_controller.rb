@@ -6,9 +6,12 @@ class SportgroundsController < ApplicationController
 
   def show
     @sportground = Sportground.find_by id: params[:id]
-    return if @sportground
-    flash[:danger] = t "sportground.create.alert.failed"
-    redirect_to root_path
+    if @sportground
+      @pitches = @sportground.pitches.page(params[:page]).per Settings.pitch.page.per
+    else
+      flash[:danger] = t "sportground.create.alert.failed"
+      redirect_to root_path
+    end
   end
 
   def new
