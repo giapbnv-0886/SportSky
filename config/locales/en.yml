@@ -117,6 +117,12 @@ en:
         failed: "Something wrong, Please try again!"
     show:
       detail: "Detail"
+      name: "Sport ground name"
+      address: "Address"
+      sport: "Sport"
+      opentime: "Open time"
+      phone: "Phone number"
+      listpitch: "List pitches of this sport ground"
     update:
       alert:
         permit: "You don't have permission!"
@@ -136,3 +142,48 @@ en:
       phone: "Phone number"
       upload: "Upload photos for sport ground"
     becomeprovider: "Become a Provider"
+    new:
+      add: "Add New Sport Ground"
+  pitch:
+    form:
+      title: "Create a new Pitch"
+      pitch_name: "Pitch Name"
+      pitch_name_holder: "Enter your pitch name here!"
+      pitch_type: "Pitch Type"
+      alert:
+        error: "Something wrong! Please try again later!"
+      min_rental: "Minimum rental period (h)"
+      nested:
+        menu: "Add menu for your pitch"
+        startday: "Start Day"
+        endday: "End Day"
+        starttime: "Start Time"
+        endtime: "End Time"
+        price: "Price"
+        price_holder: "Enter price here"
+        remove: "Remove"
+      back: "Back"
+    alert:
+      created: "Pitch was successfully created."
+      step_error: "Minimum rental period must be > 0."
+    show:
+      show: "Show"
+      available_time: "Available timeframe"
+      name: "Pitch name"
+      type: "Pitch type"
+      price: "Price"
+      detail: "Detail"
+      back: "Back"
+      contact: "Contact"
+    new:
+      add: "New pitch"
+      error: "The min rental time must be > 0 !"
+    edit:
+      edit: "Edit"
+      success: "Pitch was successfully updated."
+      add_menu: "Add menu"
+      title: "Update Info Your Pitch"
+    delete:
+      delete: "Delete"
+      sure: "Are you sure?"
+      success: "Pitch was successfully destroyed."

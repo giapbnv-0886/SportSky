@@ -1,0 +1,59 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="col-md-2">
+      <label><%= t "pitch.form.nested.startday" %></label>
+      <% if f.object.startday %>
+        <%= f.select :startday, Date::DAYNAMES.collect{|d| [d,d.to_date]},
+          { selected: [Date::DAYNAMES[(f.object.startday).wday],
+            Date::DAYNAMES[(f.object.startday).wday].to_date ] },
+              html_options = { class: "form-control" } %>
+      <% else %>
+        <%= f.select :startday, Date::DAYNAMES.collect{|d| [d,d.to_date]}, {},
+          html_options = { class: "form-control" } %>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      <label><%= t "pitch.form.nested.endday" %></label>
+      <% if f.object.endday %>
+        <%= f.select :endday, Date::DAYNAMES.collect{ |d| [d,d.to_date] },
+          { selected: [Date::DAYNAMES[(f.object.endday).wday],
+            Date::DAYNAMES[(f.object.endday).wday].to_date ] },
+              html_options = { class: "form-control" } %>
+      <% else %>
+        <%= f.select :endday, Date::DAYNAMES.collect{|d| [d,d.to_date]}, {}, html_options = {class: "form-control"} %>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      <label><%= t "pitch.form.nested.starttime" %></label>
+      <% if f.object.starttime? %>
+        <%= f.collection_select :starttime, @timeframes, :getstart, :format_starttime,
+          { selected: [f.object.starttime, f.object.starttime.strftime("%k:%M")] },
+            html_options= { class: "form-control" } %>
+      <% else %>
+        <%= f.collection_select :starttime, @timeframes, :getstart, :format_starttime,
+          { }, html_options= { class: "form-control" } %>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      <label><%= t "pitch.form.nested.endtime" %></label>
+      <% if f.object.endtime? %>
+        <%= f.collection_select :endtime, @timeframes, :getend, :format_endtime,
+          { selected: [f.object.endtime, f.object.endtime.strftime("%k:%M")] },
+            html_options= { class: "form-control" } %>
+      <% else %>
+        <%= f.collection_select :endtime, @timeframes, :getend, :format_endtime,
+          { }, html_options= { class: "form-control" } %>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      <label><%= t "pitch.form.nested.price" %></label>
+      <%= f.text_field :price, html_options = {class: "form-control",
+        "placeholder": "#{ t "pitch.form.nested.price_holder"}", type: "number", required: true} %>
+    </div>
+    <div class="col-md-2">
+      <%= link_to_remove_fields t("pitch.form.nested.remove"), f  %>
+    </div>
+  </div>
+  <br>
+</div>
+

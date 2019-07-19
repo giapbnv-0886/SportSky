@@ -6,6 +6,7 @@ class User < ApplicationRecord
   before_create :create_activation_digest
 
   has_many :sportgrounds, dependent: :destroy
+  has_many :pitches ,through: :sportgrounds
   has_many :schedules, dependent: :destroy
   has_many :rates, dependent: :destroy
   has_many :active_follows, class_name: "Follow",

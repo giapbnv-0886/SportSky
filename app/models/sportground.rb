@@ -2,7 +2,7 @@ class Sportground < ApplicationRecord
   has_many :pitches
   has_many :rates
   belongs_to :user
-  belongs_to :sportgroundtype, optional: true
+  belongs_to :sportgroundtype
 
   scope :recent, -> {order(:created_at)}
   mount_uploaders :photos, PhotoUploader

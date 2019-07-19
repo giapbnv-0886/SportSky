@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   resources :users do
     resources :sportgrounds, only: %i(index new create edit update)
   end
+  resources :sportgrounds do
+    resources :pitches, only: %i(new create edit update)
+  end
+
+  resources :pitches, except: %i(new create)
   resources :sportgrounds, except: %i(create update)
   resources :account_activations, only: %i(edit)
   resources :password_resets, except: %i(index show destroy)

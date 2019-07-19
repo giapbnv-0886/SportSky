@@ -1,0 +1,82 @@
+function generate_timefield_arr(start, end, step) {
+    if (
+        typeof start == 'undefined' ||
+        typeof end == 'undefined' ||
+        typeof step == 'undefined'
+    ) {
+        console.warn('Lacks of parameters');
+        return [];
+    }
+
+    var arr = [];
+    var cur_time = parseInt(start);
+
+    while (cur_time + step * 3600 <= end) {
+        arr.push(cur_time);
+        cur_time += step * 3600;
+    }
+    ;
+    return arr;
+}
+
+function generate_hidden_fields() {
+    let start_hour_str = $('input#opentime').val();
+    let end_hour_str = $('input#closetime').val();
+    let step = $('input#pitch_minrental').val();
+
+    let start_hour = moment(start_hour_str).format("X");
+    let end_hour = moment(end_hour_str).format("X");
+
+    console.log(start_hour, end_hour);
+
+    let timefield_arr = generate_timefield_arr(start_hour, end_hour, step);
+
+    if (timefield_arr.length > 0) {
+        let midnight = new Date();
+        midnight.setHours(0, 0, 0, 0);
+        midnight = Math.floor(midnight / 1000);
+
+        $('.timeframes_hidden').html('');
+
+        timefield_arr.forEach(function (timefield) {
+            let start_time = timefield;
+            let end_time = start_time + step * 3600;
+
+            let start_time_UTC = moment(start_time * 1000).format('HH:mm');
+            let end_time_UTC = moment(end_time * 1000).format('HH:mm');
+
+            let html = '<div class="time-nested-field">';
+            html += '<div class="row">';
+            html += '<div class="time_fields">';
+            html += '<input type="hidden" value="' + start_time_UTC + '" name="pitch[timeframes_attributes][' + start_time + '][starttime]" />';
+            html += '<input type="hidden" value="' + end_time_UTC + '" name="pitch[timeframes_attributes][' + start_time + '][endtime]" />';
+            html += '</div></div></div>';
+
+            $('.timeframes_hidden').append(html);
+        })
+    }
+}
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $('input.min-rental').change(function () {
+        let min_rental = $('input.min-rental').val();
+        let min_rental_content = $('input#minrental_content').val();
+        if( min_rental > '0' ){
+            if(min_rental != min_rental_content){
+                $('.timeframes_content .destroy').val('1');
+                generate_hidden_fields();
+            }
+            else{
+                $('.timeframes_hidden').html('');
+                $('.timeframes_content .destroy').val(false);
+            }
+        }
+        else{
+            alert('<%= j I18n.t("pitch.new.error") %>');
+            $('input.min-rental').val(1);
+        }
+    });
+    console.log( "ready!" );
+});
+

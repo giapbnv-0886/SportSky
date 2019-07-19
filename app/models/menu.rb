@@ -1,3 +1,9 @@
 class Menu < ApplicationRecord
-  has_and_belongs_to_many :pitches
+  belongs_to :pitch
+
+  validates :starttime, :endtime, presence: true
+  validates :startday, :endday, presence:  true
+
+  scope :order_price, -> {order(:price)}
+
 end

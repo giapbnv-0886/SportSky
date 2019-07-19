@@ -10,17 +10,23 @@
         <h3><%= sportground.name %></h3>
       </li>
       <li>
-        <p><%= sportground.address %></p>
+        <p><%= t "sportground.show.sport" %>:<%= sportground.sportgroundtype.name %></p>
       </li>
       <li>
-        <p><%= sportground.phone %></p>
+        <p><%= t "sportground.show.address" %>:<%= sportground.address %></p>
       </li>
       <li>
-        <p><%= sportground.opentime %>-<%= sportground.closetime %></p>
+        <p><%= t "sportground.show.phone" %>:<%= sportground.phone %></p>
       </li>
       <li>
-        <%= link_to t("sportground.delete.delete"), sportground, method: :delete,
-          data: {confirm: t("users.alert.sure"), class:"alert danger"} %>
+        <p><%= t "sportground.show.opentime" %>:<%= sportground.opentime.strftime("%d:%M") %>-
+          <%= sportground.closetime.strftime("%d:%M") %></p>
+      </li>
+      <li>
+        <% if current_user and current_user.sportgrounds.include? sportground %>
+          <%= link_to t("sportground.delete.delete"), sportground, method: :delete,
+            data: {confirm: t("users.alert.sure"), class:"alert danger"} %>
+        <% end %>
         <%= link_to t("sportground.show.detail"), sportground_path(sportground) %>
       </li>
     </ul>

@@ -1,9 +1,49 @@
 <div class="row">
   <div class="col-md-6">
-    <%= render @sportground %>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="sportground_avatar">
+          <%= image_tag "sportground.jpg", class: "sportground_avatar" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h3><%= @sportground.name %></h3>
+        <ul>
+          <li>
+            <p><%= t "sportground.show.sport" %>:<%= @sportground.sportgroundtype.name %></p>
+          </li>
+          <li>
+            <p><%= t "sportground.show.address" %>:<%= @sportground.address %></p>
+          </li>
+          <li>
+            <p><%= t "sportground.show.phone" %>:<%= @sportground.phone %></p>
+          </li>
+          <li>
+            <p><%= t "sportground.show.opentime" %>:<%= @sportground.opentime.strftime("%d:%M") %>-
+              <%= @sportground.closetime.strftime("%d:%M") %></p>
+          </li>
+            <% if current_user and current_user.sportgrounds.include? @sportground %>
+            <div class="row">
+              <%= link_to t("sportground.delete.delete"), @sportground, method: :delete,
+                data: {confirm: t("users.alert.sure"), class:"btn btn-danger"} %>
+            </div>
+
+            <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="col-md-6">
-
+    <h3><%= t "sportground.show.listpitch" %></h3>
+    <%= render @pitches %>
+    <br>
+    <% if @sportground.user.was? current_user %>
+      <div class="row">
+        <%= link_to t("pitch.new.add"), new_sportground_pitch_path(@sportground),
+          class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    <%= paginate @pitches, theme: "twitter-bootstrap-3" %>
   </div>
 </div>
 
