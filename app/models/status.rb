@@ -1,3 +1,3 @@
 class Status < ApplicationRecord
-  belongs_to :schedule
+  has_many :schedules, dependent: :nullify
 end

@@ -1,0 +1,11 @@
+<div class="row">
+  <ul>
+    <li><%= t "schedule.show.date" %>: <span><%= schedule.date %></span> </li>
+    <li><%= t "schedule.show.starttime" %>: <span><%= schedule.starttime.strftime("%R") %></span></li>
+    <li><%= t "schedule.show.endtime" %>: <span><%= schedule.endtime.strftime("%R") %></span></li>
+    <li><%= t "schedule.show.cost" %>: <span class="pitch-cost"><%= schedule.cost %></span></li>
+    <li></li>
+    <li><%= t "schedule.show.created_at" %>: <span><%= schedule.created_at.in_time_zone t("timezone") %></span></li>
+    <li><%= t "schedule.show.updated_at" %>: <span><%= schedule.updated_at.in_time_zone t("timezone") %></span></li>
+  </ul>
+</div>

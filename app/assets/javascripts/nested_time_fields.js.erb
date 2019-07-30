@@ -54,23 +54,19 @@ function generate_hidden_fields() {
     }
 }
 
-$( document ).ready(function() {
-    $('input.min-rental').change(function () {
-        let min_rental = $('input.min-rental').val();
-        let min_rental_content = $('input#minrental_content').val();
-        if( min_rental > '0' ){
-            if(min_rental != min_rental_content){
-                $('.timeframes_content .destroy').val('1');
-                generate_hidden_fields();
-            }
-            else{
-                $('.timeframes_hidden').html('');
-                $('.timeframes_content .destroy').val(false);
-            }
+function create_time_frames_by_minrental() {
+    let min_rental = $('input.min-rental').val();
+    let min_rental_content = $('input#minrental_content').val();
+    if (min_rental > '0') {
+        if (min_rental != min_rental_content) {
+            $('.timeframes_content .destroy').val('1');
+            generate_hidden_fields();
+        } else {
+            $('.timeframes_hidden').html('');
+            $('.timeframes_content .destroy').val(false);
         }
-        else{
-            alert('<%= j I18n.t("pitch.new.error") %>');
-            $('input.min-rental').val(1);
-        }
-    });
-});
+    } else {
+        alert('<%= j I18n.t("pitch.new.error") %>');
+        $('input.min-rental').val(1);
+    }
+}

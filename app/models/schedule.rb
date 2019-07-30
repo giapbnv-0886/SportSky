@@ -1,7 +1,7 @@
 class Schedule < ApplicationRecord
   belongs_to :pitch
   belongs_to :user
-  belongs_to :status
+  belongs_to :status, optional: true
 
   validates :starttime, :endtime, presence: true
   validate :valid_time

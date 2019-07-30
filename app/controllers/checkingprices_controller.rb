@@ -2,7 +2,9 @@ class CheckingpricesController < ApplicationController
   before_action :correct_pitch
 
   def show
-    @price = get_price params[:date].to_date, params[:timeframe_id].to_i
+    @date = params[:date].to_date
+    @timeframe_id = params[:timeframe_id].to_i
+    @price = get_price @date, @timeframe_id
     respond_to do |format|
       format.html do
         redirect_to root_path

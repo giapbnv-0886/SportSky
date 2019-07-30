@@ -19,8 +19,9 @@ Rails.application.routes.draw do
   resources :pitches, except: %i(new create) do
     resource :checkingprices, only: %i(show)
     resource :checkingtimeframes, only: %i(show)
-  end
-
+    resources :schedules, only: %i(new create)
+    end
+  resources :schedules, except: %i(new create)
   resources :account_activations, only: %i(edit)
   resources :password_resets, except: %i(index show destroy)
   resources :follows, only: %i(create destroy)

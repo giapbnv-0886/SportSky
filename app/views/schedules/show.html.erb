@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-4">
+    <label ><%= t "schedule.show.provider" %></label>
+    <div class="row">
+      <%= render @schedule.pitch.sportground %>
+    </div>
+    <div class="row">
+      <label><%= t "schedule.show.pitch" %></label>
+    </div>
+    <div class="row">
+      <%= render @schedule.pitch %>
+    </div>
+    <div class="row">
+      <label><%= t "schedule.show.owner" %></label>
+    </div>
+    <div class="row">
+      <%= render @schedule.pitch.sportground.user %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label ><%= t "schedule.show.schedule" %></label>
+    <div class="row">
+      <%= render @schedule %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label ><%= t "schedule.show.customer" %></label>
+    <div class="row">
+      <%= render @schedule.user %>
+    </div>
+  </div>
+</div>
