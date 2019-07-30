@@ -1,7 +1,39 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-6">
     <div class="sportground_avatar">
-      <%= image_tag "sportground.jpg", class: "sportground_avatar" %>
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <% if sportground.photos and  sportground.photos.size > 0 %>
+            <% sportground.photos.each do |a| %>
+              <div class="item">
+                <%= image_tag a.url, class: "sportground_avatar" %>
+              </div>
+              <% end %>
+            <div class="item active">
+              <%= image_tag sportground.photos.last.url, class: "sportground_avatar" %>
+            </div>
+          <% else %>
+            <div class="item active">
+              <%= image_tag "sportground.jpg", class: "sportground_avatar" %>
+            </div>
+          <% end %>
+        </div>
+        <a class="left carousel-control" href="#carousel-example-generic"
+          role="button" data-slide="prev">
+          <span class="glyphicon" aria-hidden="true"></span>
+          <span class="sr-only">.</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic"
+          role="button" data-slide="next">
+          <span class="glyphicon " aria-hidden="true"></span>
+          <span class="sr-only">.</span>
+        </a>
+      </div>
     </div>
   </div>
   <div class="col-md-6">

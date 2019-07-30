@@ -168,13 +168,19 @@ en:
       step_error: "Minimum rental period must be > 0."
     show:
       show: "Show"
+      select_day: "Select day"
+      check_price: "Check price"
       available_time: "Available timeframe"
+      book: "Book"
       name: "Pitch name"
       type: "Pitch type"
       price: "Price"
       detail: "Detail"
       back: "Back"
       contact: "Contact"
+      check: "Check"
+      owner: "Owner"
+      email: "Email"
     new:
       add: "New pitch"
       error: "The min rental time must be > 0 !"
@@ -187,3 +193,9 @@ en:
       delete: "Delete"
       sure: "Are you sure?"
       success: "Pitch was successfully destroyed."
+    check_price:
+      warning: "Warning!"
+      error_time: "The timeframe error or hasn't been updated! Please try again or contact provider!"
+  schedule:
+    validate:
+      time: "Time invalid. Please try again!"

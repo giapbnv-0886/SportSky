@@ -1,29 +1,100 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
+    <div class="sportground_avatar">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <% if @pitch.sportground.photos.size %>
+            <% @pitch.sportground.photos.each do |a| %>
+              <div class="item">
+                <%= image_tag a.url, class: "sportground_avatar" %>
+              </div>
+            <% end %>
+            <div class="item active">
+              <%= image_tag @pitch.sportground.photos.last.url, class: "sportground_avatar" %>
+            </div>
+          <% else %>
+            <div class="item active">
+              <%= image_tag "sportground.jpg", class: "sportground_avatar" %>
+            </div>
+          <% end %>
+        </div>
+        <a class="left carousel-control" href="#carousel-example-generic"
+           role="button" data-slide="prev">
+          <span class="glyphicon" aria-hidden="true"></span>
+          <span class="sr-only">.</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic"
+           role="button" data-slide="next">
+          <span class="glyphicon " aria-hidden="true"></span>
+          <span class="sr-only">.</span>
+        </a>
+      </div>
+    </div>
     <h4><%= t "pitch.show.name" %>: <%= @pitch.name %></h4>
     <ul>
       <li><%= t "pitch.show.type" %>: <%= @pitch.pitchtype.name %></li>
+      <li><%= t "sportground.show.name" %>: <%= @pitch.sportground.name %></li>
+      <li><%= t "sportground.show.address" %>: <%= @pitch.sportground.address %></li>
+      <li><%= t "sportground.show.phone" %>: <%= @pitch.sportground.phone %></li>
+      <li><%= t "pitch.show.owner" %>: <%= @pitch.sportground.user.name %></li>
+      <li><%= t "pitch.show.email" %>: <%= @pitch.sportground.user.email %></li>
       <% if @pitch.menus.order_price.first %>
-        <li><%= t "pitch.show.price" %>: <%= @pitch.menus.order_price.first.price%></li>
+        <li><%= t "pitch.show.price" %>: <%= @pitch.menus.order_price.first.price %></li>
       <% else %>
         <li><%= t "pitch.show.price" %>: <%= t "pitch.show.contact" %></li>
-    <% end %>
+      <% end %>
     </ul>
     <% if current_user and current_user.pitches.include?(@pitch) %>
       <%= link_to t("pitch.edit.edit"), edit_pitch_path(@pitch) %>
     <% end %>
     <%= link_to t("pitch.show.back"), sportground_path(@pitch.sportground) %>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="row">
-      <div class="col-md-8">
-        <label><%= t "pitch.show.available_time" %></label>
-        <%= collection_select @pitch, :timeframe_id, Timeframe.belong(@pitch),
-          :id, :combine_time, options = {prompt: true}, html_options = { class: "form-control" } %>
+      <div class="col-md-6">
+          <div class="check-time-frame">
+            <%= link_to "", pitch_checkingtimeframes_url(@pitch, date: Date.today), remote: true %>
+          </div>
+          <label><%= t "pitch.show.select_day" %></label>
+          <%= select :checktimeframe, :date, week_collection_from(Date.today), options = {},
+            html_options = {class: "form-control", onchange: 'checktimeframe()' } %>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
+        <div class="check-price">
+          <%= link_to "", pitch_checkingprices_url(@pitch), remote: true %>
+        </div>
+          <label><%= t "pitch.show.available_time" %></label>
+          <div class="time-available">
+            <%= collection_select :checkprice, :timeframe_id, @time_availables,
+              :id, :combine_time, options = {prompt: true}, html_options =
+                {class: "form-control", onchange: 'checkprice()'} %>
+          </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <span><%= t "pitch.show.price" %> : </span>
+        <span class="pitch-cost"></span>
+        <div class="notification hidden">
+          <div class="alert alert-warning alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><%= t "pitch.check_price.warning" %></strong> <%= t "pitch.check_price.error_time" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= submit_tag t("pitch.show.book"), html_options = {class: "btn btn-warning"} %>
       </div>
     </div>
   </div>
+  <div class="col-md-4">
+  </div>
 </div>
-

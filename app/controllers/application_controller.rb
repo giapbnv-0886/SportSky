@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   require "date"
-
   before_action :set_locale
   private
   def default_url_options

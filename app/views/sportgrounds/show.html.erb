@@ -1,41 +1,71 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
+    <h3><%= @sportground.name %></h3>
     <div class="row">
-      <div class="col-md-4">
-        <div class="sportground_avatar">
-          <%= image_tag "sportground.jpg", class: "sportground_avatar" %>
+      <div class="sportground_avatar">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <% if @sportground.photos.size %>
+              <% @sportground.photos.each do |a| %>
+                <div class="item">
+                  <%= image_tag a.url, class: "sportground_avatar" %>
+                </div>
+              <% end %>
+              <div class="item active">
+                <%= image_tag @sportground.photos.last.url, class: "sportground_avatar" %>
+              </div>
+            <% else %>
+              <div class="item active">
+                <%= image_tag "sportground.jpg", class: "sportground_avatar" %>
+              </div>
+            <% end %>
+          </div>
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon" aria-hidden="true"></span>
+            <span class="sr-only">.</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon " aria-hidden="true"></span>
+            <span class="sr-only">.</span>
+          </a>
         </div>
       </div>
-      <div class="col-md-6">
-        <h3><%= @sportground.name %></h3>
-        <ul>
-          <li>
-            <p><%= t "sportground.show.sport" %>:<%= @sportground.sportgroundtype.name %></p>
-          </li>
-          <li>
-            <p><%= t "sportground.show.address" %>:<%= @sportground.address %></p>
-          </li>
-          <li>
-            <p><%= t "sportground.show.phone" %>:<%= @sportground.phone %></p>
-          </li>
-          <li>
-            <p><%= t "sportground.show.opentime" %>:<%= @sportground.opentime.strftime("%d:%M") %>-
-              <%= @sportground.closetime.strftime("%d:%M") %></p>
-          </li>
-            <% if current_user and current_user.sportgrounds.include? @sportground %>
-            <div class="row">
-              <%= link_to t("sportground.delete.delete"), @sportground, method: :delete,
-                data: {confirm: t("users.alert.sure"), class:"btn btn-danger"} %>
-            </div>
+    </div>
+    <div class="row">
+      <ul>
+        <li>
+          <p><%= t "sportground.show.sport" %>:<%= @sportground.sportgroundtype.name %></p>
+        </li>
+        <li>
+          <p><%= t "sportground.show.address" %>:<%= @sportground.address %></p>
+        </li>
+        <li>
+          <p><%= t "sportground.show.phone" %>:<%= @sportground.phone %></p>
+        </li>
+        <li>
+          <p><%= t "sportground.show.opentime" %>:<%= @sportground.opentime.strftime("%d:%M") %>-
+            <%= @sportground.closetime.strftime("%d:%M") %></p>
+        </li>
+        <% if current_user and current_user.sportgrounds.include? @sportground %>
+          <div class="row">
+            <%= link_to t("sportground.delete.delete"), @sportground, method: :delete,
+                        data: {confirm: t("users.alert.sure"), class:"btn btn-danger"} %>
+          </div>
 
-            <% end %>
-        </ul>
-      </div>
+        <% end %>
+      </ul>
     </div>
   </div>
   <div class="col-md-6">
     <h3><%= t "sportground.show.listpitch" %></h3>
-    <%= render @pitches %>
+    <div class="pitch-list">
+      <%= render @pitches %>
+    </div>
     <br>
     <% if @sportground.user.was? current_user %>
       <div class="row">
@@ -43,7 +73,9 @@
           class: "btn btn-primary" %>
       </div>
     <% end %>
-    <%= paginate @pitches, theme: "twitter-bootstrap-3" %>
+    <div class="paginate">
+      <%= paginate @pitches, theme: "twitter-bootstrap-3", remote: true %>
+    </div>
   </div>
 </div>
 

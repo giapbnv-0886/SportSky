@@ -10,8 +10,12 @@
     </section>
   </aside>
   <aside class="col-md-6">
-    <%= render @sportgrounds %>
-    <%= paginate @sportgrounds, theme: "twitter-bootstrap-3" %>
+    <div class="sport-ground">
+      <%= render @sportgrounds %>
+    </div>
+    <div class="paginate">
+      <%= paginate @sportgrounds, theme: "twitter-bootstrap-3", remote:true %>
+    </div>
     <% if @user.was? current_user %>
       <div class="row">
         <%= link_to t("sportground.new.add"), new_user_sportground_path(current_user),

@@ -1,0 +1,3 @@
+$('.time-available').html('<%= j collection_select :checkprice, :timeframe_id, @time_availables,
+  :id, :combine_time, options = {prompt: true}, html_options =
+    {class: "form-control", onchange: 'checkprice()'} %>');
