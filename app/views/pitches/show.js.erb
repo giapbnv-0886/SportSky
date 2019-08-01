@@ -1,0 +1,23 @@
+function create_new_url(old_url, current_page) {
+    var new_url;
+    var url = new URL(old_url);
+    var query_string = url.search;
+    var search_params = new URLSearchParams(query_string);
+    if (search_params.has('page')) {
+        search_params.set('page', current_page);
+        url.search = search_params.toString();
+        return url.toString();
+    } else {
+        search_params.append('page', current_page);
+        url.search = search_params.toString();
+        return url.toString();
+    }
+}
+
+var page = '<%= j @schedules.current_page.to_s %>'
+var old_url = window.location.href.toString()
+$('.row.list-schedules').html('<%= j render @schedules %>');
+$('.paginate').html('<%= j paginate @schedules, theme: "twitter-bootstrap-3",
+  remote:true %>');
+window.history.pushState(history.state, '<%= j full_title "" %>',
+    create_new_url(old_url, page));

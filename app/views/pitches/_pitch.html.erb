@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <h4><%= t "pitch.show.name" %>: <%= pitch.name %></h4>
+    <h4><%= t "pitch.show.name" %>: <%= link_to pitch.name, pitch_path(pitch) %></h4>
     <ul>
       <li><%= t "pitch.show.type" %>: <%= pitch.pitchtype.name %></li>
       <% if pitch.menus.size > 0 %>
@@ -9,7 +9,6 @@
         <li><%= t "pitch.show.price" %>: <%= t "pitch.show.contact" %></li>
     <% end %>
     </ul>
-    <%= link_to t("pitch.show.detail"), pitch_path(pitch) %>
     <% if current_user and current_user.pitches.include?(pitch) %>
       <%= link_to t("pitch.edit.edit"), edit_pitch_path(pitch) %>
       <%= link_to t("pitch.delete.delete"), pitch, method: :delete,

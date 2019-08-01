@@ -2,31 +2,31 @@
   <%= render "shared/error_messages", object: f.object %>
   <div class="form-group">
     <%= f.label I18n.t("static-pages.signup.username") + ":",
-                class: "col-sm-3 control-label" %>
+      class: "col-sm-3 control-label" %>
     <%= f.text_field :name, class: "form-controll col-sm-6",
-                     placeholder: I18n.t("static-pages.signup.username") %>
+      placeholder: I18n.t("static-pages.signup.username") %>
   </div>
   <div class="form-group">
     <%= f.label I18n.t("static-pages.signup.email") + ":",
-                class: "col-sm-3 control-label" %>
+      class: "col-sm-3 control-label" %>
     <%= f.email_field :email, class: "form-controll col-sm-6",
-                      placeholder: I18n.t("static-pages.signup.email") %>
+      placeholder: I18n.t("static-pages.signup.email") %>
   </div>
   <div class="form-group">
     <%= f.label I18n.t("static-pages.signup.password") + ":",
-                class: "col-sm-3 control-label" %>
+      class: "col-sm-3 control-label" %>
     <%= f.password_field :password, class: "form-controll col-sm-6",
-                         placeholder: I18n.t("static-pages.signup.password") %>
+      placeholder: I18n.t("static-pages.signup.password") %>
   </div>
   <div class="form-group">
     <%= f.label I18n.t("static-pages.signup.confirmpassword") + ":",
-                class: "col-sm-3 control-label" %>
+      class: "col-sm-3 control-label" %>
     <%= f.password_field :password_confirmation,
-                         class: "form-controll col-sm-6",
-                         placeholder: I18n.t("static-pages.signup.confirmpassword") %>
+      class: "form-controll col-sm-6",
+         placeholder: I18n.t("static-pages.signup.confirmpassword") %>
   </div>
   <div class="col-sm-4"></div>
   <%= f.submit yield(:button_text),
-               class: "fadeIn fourth button center" %>
+    class: "fadeIn fourth button center" %>
   <%= link_to I18n.t("users.edit.login"), login_path %>
 <% end %>

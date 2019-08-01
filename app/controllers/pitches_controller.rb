@@ -11,6 +11,8 @@ class PitchesController < ApplicationController
   def show
     @sportground = @pitch.sportground
     @time_availables = get_time_frames_for Date.today
+    @schedules = @pitch.schedules.order("status_id", "updated_at DESC")
+      .page(params[:page]).per Settings.schedule.page.per
     respond_to do |format|
       format.html
       format.js

@@ -39,7 +39,7 @@
   <div class="col-md-6">
     <ul>
       <li>
-        <h3><%= sportground.name %></h3>
+        <h3><%= link_to sportground.name, sportground_path(sportground) %></h3>
       </li>
       <li>
         <p><%= t "sportground.show.sport" %>:<%= sportground.sportgroundtype.name %></p>
@@ -56,10 +56,10 @@
       </li>
       <li>
         <% if current_user and current_user.sportgrounds.include? sportground %>
+          <%= link_to t("sportground.edit.edit"), edit_sportground_path(sportground) %>
           <%= link_to t("sportground.delete.delete"), sportground, method: :delete,
             data: {confirm: t("users.alert.sure"), class:"alert danger"} %>
         <% end %>
-        <%= link_to t("sportground.show.detail"), sportground_path(sportground) %>
       </li>
     </ul>
   </div>

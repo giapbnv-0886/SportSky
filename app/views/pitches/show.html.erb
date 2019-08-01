@@ -89,16 +89,27 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <%= form_for Schedule.new, url:pitch_schedules_path(@pitch) do |f|%>
-          <%= f.hidden_field :date, value: Date.today %>
-          <%= hidden_field_tag :schedule_timeframe_id, nil, options = {} %>
-          <%= f.submit t("sportground.submit"), http_options = { class:"btn btn-warning" } %>
-        <% end %>
+    <% if logged_in? and current_user.pitches.exclude?@pitch %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= form_for Schedule.new, url:pitch_schedules_path(@pitch) do |f|%>
+            <%= f.hidden_field :date, value: Date.today %>
+            <%= hidden_field_tag :schedule_timeframe_id, nil, options = {} %>
+            <%= f.submit t("sportground.submit"), http_options = { class:"btn btn-warning" } %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-  </div>
+      </div>
+    <% else %>
+      </div>
+      <div class="col-md-4">
+        <h3><%= t  "schedule.index.list_schedule" %></h3>
+        <div class="row list-schedules">
+          <%= render @schedules %>
+        </div>
+        <div class="paginate">
+          <%= paginate @schedules, theme: "twitter-bootstrap-3", remote: true %>
+        </div>
+      </div>
+    <% end %>
 </div>

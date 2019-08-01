@@ -145,3 +145,23 @@ footer ul li {
 ul{
   list-style-type: none;
 }
+.contents{
+  margin: 2% 5%;
+}
+.schedule-cost{
+  font-size: 32px;
+  font-weight: 600;
+  color: $orange;
+}
+.list-schedules{
+  padding-left: 16px;
+  border-left: $gray-light solid 1px;
+}
+.Pending{
+  background-color: $blue-1;
+  color: $white-2;
+}
+.Done{
+  background-color: $green-1;
+  color: $white-2;
+}

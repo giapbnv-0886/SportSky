@@ -20,3 +20,6 @@ sportground:
 pitch:
   page:
     per: 4
+schedule:
+  page:
+    per: 5

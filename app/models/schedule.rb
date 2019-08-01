@@ -7,6 +7,8 @@ class Schedule < ApplicationRecord
   validate :valid_time
   validates :date, presence: true
 
+  scope :sorted , ->{ order "status_id","updated_at DESC" }
+
   private
 
   def valid_time

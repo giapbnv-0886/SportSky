@@ -1,10 +1,14 @@
 class SchedulesController < ApplicationController
   before_action :correct_user
   before_action :get_pitch, only: %i(new create)
-  before_action :correct_schedule, except: %i(new create)
-  before_action :get_timeframe, :get_cost, only: %i(create update)
+  before_action :correct_schedule, except: %i(index new create)
+  before_action :correct_status, only: %i(edit update destroy)
+  before_action :get_timeframe, :get_cost, only: %i(create)
 
-  def index; end
+  def index
+    @user_schedules = current_user.schedules.sorted.
+      page(params[:page]).per Settings.schedule.page.per
+  end
 
   def show
     respond_to do |format|
@@ -27,9 +31,17 @@ class SchedulesController < ApplicationController
 
   end
 
-  def edit; end
+  def edit;  end
 
-  def update; end
+  def update
+    if @schedule.update_attributes update_params
+      flash[:info] = t "schedule.update.accepted"
+      redirect_to @schedule
+    else
+      flash[:danger] = t "schedule.update.error"
+      redirect_back_or root_path
+    end
+  end
 
   def destroy; end
 
@@ -37,6 +49,10 @@ class SchedulesController < ApplicationController
     def schedule_params
       (params.require(:schedule).permit :date).merge({starttime: @timeframe.starttime,
         endtime: @timeframe.endtime, cost: @cost, user_id: @user.id})
+    end
+
+    def update_params
+      params.require(:schedule).permit :date, :starttime, :endtime, :cost, :status_id
     end
 
     def correct_user
@@ -70,9 +86,17 @@ class SchedulesController < ApplicationController
 
     def correct_schedule
       @schedule = Schedule.find_by id: params[:id]
-      return if  @schedule and @schedule.user.was?current_user
+      return if  @schedule && @schedule.user.was?(current_user) ||
+        @schedule.pitch.sportground.user.was?(current_user)
       flash[:danger] = t "schedule.show.schedule_error"
       redirect_to root_path
+    end
+
+    def correct_status
+      store_location
+      return if @schedule.status.id == 1
+      flash[:warning] = t "schedule.edit.error_status"
+      redirect_back_or @schedule
     end
 
     def get_price date, timeframe_id

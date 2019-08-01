@@ -219,3 +219,16 @@ en:
       cost: "Cost"
       created_at: "Create time"
       updated_at: "Last Update"
+      status: "Status"
+    index:
+      list_schedule: "List schedule"
+    edit:
+      error_status: "You only edit or delete schedule when it is depending!"
+    update:
+      error: "Cannot update! please check again!"
+      accepted: "The schedule has been accepted!"
+      confirm_message: "Are you sure?"
+      accept: "Accept"
+      cancel: "Cancel"
+      confirm: "Confirm"
+      change_status: "Change status this schedule"

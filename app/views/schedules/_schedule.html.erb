@@ -1,11 +1,44 @@
 <div class="row">
+  <h3><%= link_to schedule.pitch.sportground.name, schedule %></h3>
+</div>
+<div class="row">
   <ul>
     <li><%= t "schedule.show.date" %>: <span><%= schedule.date %></span> </li>
     <li><%= t "schedule.show.starttime" %>: <span><%= schedule.starttime.strftime("%R") %></span></li>
     <li><%= t "schedule.show.endtime" %>: <span><%= schedule.endtime.strftime("%R") %></span></li>
-    <li><%= t "schedule.show.cost" %>: <span class="pitch-cost"><%= schedule.cost %></span></li>
+    <li><%= t "schedule.show.cost" %>: <span class="schedule-cost"><%= schedule.cost %></span></li>
     <li></li>
     <li><%= t "schedule.show.created_at" %>: <span><%= schedule.created_at.in_time_zone t("timezone") %></span></li>
     <li><%= t "schedule.show.updated_at" %>: <span><%= schedule.updated_at.in_time_zone t("timezone") %></span></li>
   </ul>
+  <span><%= t "schedule.show.status" %>: </span><span class="status <%= schedule.status.name %>">
+    <%= schedule.status.name %></span>
+  <br>
+  <h4><%= t "schedule.update.change_status" %></h4>
+  <div class="row">
+    <% if logged_in? and schedule.pitch.sportground.user.was?current_user %>
+      <div class="confirm">
+        <%= form_for schedule do |f| %>
+          <div class="row">
+            <div class="col-md-3 form-group">
+              <%= f.collection_select :status_id, Status.all, :id, :name, class: "form-control" %>
+            </div>
+            <div class="col-md-3">
+              <%= f.submit t("schedule.update.confirm"), data: { confirm: t("schedule.update.confirm_message") },
+                class: "btn btn-primary form-control" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="confirm">
+        <%= form_for schedule do |f| %>
+          <%= f.hidden_field :status_id, value: 4 %>
+          <%= f.submit t("schedule.update.cancel"), data: { confirm: t("schedule.update.confirm_message") },
+                       class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
+<br>
