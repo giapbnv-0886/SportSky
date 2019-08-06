@@ -15,3 +15,8 @@ Pitchtype.create(name: "Normal pitch", sportgroundtype_id: "3")
 Pitchtype.create(name: "VIP pitch", sportgroundtype_id: "3")
 Pitchtype.create(name: "Normal pitch", sportgroundtype_id: "4")
 Pitchtype.create(name: "VIP pitch", sportgroundtype_id: "4")
+#create status
+Status.create name: "Pending"
+Status.create name: "Accepted"
+Status.create name: "Done"
+Status.create name: "Canceled"

@@ -19,7 +19,8 @@
         <div class="col-md-3">
           <label><%= t "pitch.form.min_rental" %></label>
           <%= f.text_field :minrental, http_options = {"type": "number",
-            "class": "form-control min-rental", "placeholder": "#{t "pitch.form.min_rental"}" } %>
+            "class": "form-control min-rental", "placeholder": "#{t "pitch.form.min_rental"}",
+              onchange: "create_time_frames_by_minrental()" } %>
           <%= hidden_field_tag :opentime, @sportground.opentime.strftime("2000-1-1 %H:%M") %>
           <%= hidden_field_tag :closetime, @sportground.closetime.strftime("2000-1-1 %H:%M") %>
           <%= hidden_field_tag :minrental_content, @pitch.minrental %>

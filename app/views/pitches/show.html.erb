@@ -91,7 +91,11 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <%= submit_tag t("pitch.show.book"), html_options = {class: "btn btn-warning"} %>
+        <%= form_for Schedule.new, url:pitch_schedules_path(@pitch) do |f|%>
+          <%= f.hidden_field :date, value: Date.today %>
+          <%= hidden_field_tag :schedule_timeframe_id, nil, options = {} %>
+          <%= f.submit t("sportground.submit"), http_options = { class:"btn btn-warning" } %>
+        <% end %>
       </div>
     </div>
   </div>

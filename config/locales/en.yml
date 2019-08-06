@@ -1,4 +1,5 @@
 en:
+  timezone: "Hanoi"
   app-name: "SportSky"
   base_title: "SportSky, Sport in your hand"
   static-pages:
@@ -197,5 +198,24 @@ en:
       warning: "Warning!"
       error_time: "The timeframe error or hasn't been updated! Please try again or contact provider!"
   schedule:
+    schedule: "Schedule"
     validate:
       time: "Time invalid. Please try again!"
+    create:
+      pitch_error: "Cannot find pitch. Please try again!"
+      save_error: "Something error! Please try again later."
+      success: "The schedule has been created. Let's check info again."
+    show:
+      schedule_error: "Cannot find schedule or you don't have permission. Please try again later!"
+      timeframe_error: "The timeframe invalid. Please check again!"
+      provider: "Info of Provider"
+      schedule: "Schedule detail"
+      customer: "Customer info"
+      pitch: "Pitch info"
+      owner: "Sport ground owner"
+      date: "Date"
+      starttime: "Starttime"
+      endtime: "Endtime"
+      cost: "Cost"
+      created_at: "Create time"
+      updated_at: "Last Update"

@@ -69,9 +69,10 @@ ActiveRecord::Schema.define(version: 2019_07_19_063702) do
     t.date "date"
     t.time "starttime"
     t.time "endtime"
+    t.integer "cost"
     t.bigint "pitch_id"
     t.bigint "user_id"
-    t.bigint "status_id"
+    t.bigint "status_id", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pitch_id"], name: "index_schedules_on_pitch_id"
