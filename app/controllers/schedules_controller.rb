@@ -57,10 +57,16 @@ class SchedulesController < ApplicationController
 
     def correct_user
       @user = current_user
-      return if @user and @user == current_user
-      flash[:warning] = t "users.alert.login"
-      store_location
-      redirect_to login_path
+      if @user and @user == current_user
+        return if @user.phone_confirmed
+        flash[:warning] = t "users.verify.required"
+        store_location
+        redirect_to new_phone_verifications_path
+      else
+        flash[:warning] = t "users.alert.login"
+        store_location
+        redirect_to login_path
+      end
     end
 
     def get_pitch

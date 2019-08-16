@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     resource :checkingprices, only: %i(show)
     resource :checkingtimeframes, only: %i(show)
     resources :schedules, only: %i(new create)
-    end
+  end
+
+  resource :phone_verifications, except: %i(show delete)
   resources :schedules, except: %i(new create)
   resources :account_activations, only: %i(edit)
   resources :password_resets, except: %i(index show destroy)

@@ -134,6 +134,10 @@ ActiveRecord::Schema.define(version: 2019_07_19_063702) do
     t.datetime "reset_sent_at"
     t.boolean "admin", default: false
     t.string "remember_digest"
+    t.string "phone_digest"
+    t.boolean "phone_confirmed", default: false
+    t.datetime "phone_confirm_at"
+    t.datetime "phone_sent_at"
   end
 
   add_foreign_key "menus", "pitches"

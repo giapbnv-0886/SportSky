@@ -7,5 +7,10 @@ class AddColumnsToUser < ActiveRecord::Migration[5.2]
     add_column :users, :reset_sent_at, :datetime
     add_column :users, :admin, :boolean, default: false
     add_column :users, :remember_digest, :string
+    add_column :users, :phone_digest, :string
+    add_column :users, :phone_confirmed, :boolean, default: false
+    add_column :users, :phone_confirm_at, :datetime
+    add_column :users, :phone_sent_at, :datetime
+
   end
 end

@@ -43,7 +43,6 @@ en:
       sure: "You sure?"
       error: "Failed! Please check again!"
       activate: "Please check e-mail to activate your account"
-
     error: "error"
     index:
       gravatar: "Gravater"
@@ -92,6 +91,19 @@ en:
       error_empty: "cannot be empty!"
       reset_success: "Password has been reset!"
       token_invalid: "Invalid reset password link!"
+    verify:
+      message: "Your activate code is %{phone_token}. This token will be expired in %{expired_time} minutes"
+      login: "You must login before verify your phone"
+      sent: "The code has been sent. Please check your phone."
+      time_expired: "You only can request again after %{expired_time} minutes"
+      verified: "Your phone has been verified!"
+      error_pin: "Active failed! Please check your PIN and try again!"
+      header: "Verify your phone"
+      pin_label: "Verify PIN"
+      phone_number: "Your phone  number"
+      phone_format: "+84xxxxxxxxxx"
+      required: "You must verify your phone before book schedules!"
+      submit: "Submit"
   sessions:
     email: "Email"
     phone: "Phone Number"

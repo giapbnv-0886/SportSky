@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token,  :forget_token, :reset_token
+  attr_accessor :remember_token, :activation_token,  :forget_token, :reset_token, :phone_token, :phone_temp
   has_secure_password
 
   before_save :downcase_email
@@ -50,6 +50,10 @@ class User < ApplicationRecord
     update_attributes activated: true, activated_at: Time.zone.now
   end
 
+  def verify_phone
+    update_attributes phone_confirmed: true, phone_confirm_at: Time.zone.now, phone: self.phone_temp
+  end
+
   def send_activation_email
     UsersMailer.account_activation(self).deliver_now
   end
@@ -62,11 +66,30 @@ class User < ApplicationRecord
 
   def create_activation_digest
     self.activation_token = User.new_token
-    self.activation_digest = User.digest(activation_token)
+    self.activation_digest = User.digest activation_token
   end
 
   def send_password_reset_email
     UsersMailer.password_reset(self).deliver_now
+  end
+
+  def create_phone_digest
+    self.phone_token = User.new_phone_token
+    self .phone_digest = User.digest phone_token
+    self.phone_confirmed = false
+  end
+
+  def send_phone_verify_message_to phone_number
+    self.phone_temp = phone_number
+    return if phone_sent_at && !phone_confirm_expired?
+    client = Twilio::REST::Client.new ENV["account_sid"], ENV["auth_token"]
+    message = client.messages.create({
+      from: ENV["phone_number"],
+      to: phone_number,
+      body: I18n.t("users.verify.message",phone_token: phone_token, expired_time: 15 )
+      })
+    update_attributes phone_sent_at: Time.zone.now
+    message.sid
   end
 
   def was? obj
@@ -91,6 +114,10 @@ class User < ApplicationRecord
     self.active_follows.find_by(followed_id: user_id)
   end
 
+  def phone_confirm_expired?
+    phone_sent_at < 1.minutes.ago
+  end
+
   def password_reset_expired?
     reset_sent_at < Settings.user.expired_time.hours.ago
   end
@@ -104,12 +131,16 @@ class User < ApplicationRecord
   class << self
     def digest string
       cost = ActiveModel::SecurePassword.min_cost ?
-                 BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+        BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
       BCrypt::Password.create string, cost: cost
     end
 
     def new_token
       SecureRandom.urlsafe_base64
+    end
+
+    def new_phone_token
+      SecureRandom.base64 Settings.phone.token.len
     end
   end
 end
